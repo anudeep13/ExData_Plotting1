@@ -1,0 +1,18 @@
+df=read.table("household_power_consumption.txt",sep=";",header=TRUE)
+xf=subset(df,Date=="2007-02-01" | Date=="2007-02-02")
+df$Date=dmy(df$Date)
+xf=subset(df,Date=="2007-02-01" | Date=="2007-02-02")
+xf[,5]=as.numeric(as.character(xf[,5]))
+xf[,6]=as.numeric(as.character(xf[,6]))
+xf[,7]=as.numeric(as.character(xf[,7]))
+xf[,8]=as.numeric(as.character(xf[,8]))
+xf[,3]=as.numeric(as.character(xf[,3]))
+xf[,4]=as.numeric(as.character(xf[,4]))
+a=as.character(xf[,1])
+b=paste(a,xf[,2])
+xf$datetime=(strptime(b,"%Y-%m-%d %H:%M:%S"))
+hist(xf$Global_active_power,col="red",main="Global Active Power",xlab="Global Active Power(kilowatts)")
+dev.copy(png,"plot1.png")
+dev.off()
+
+
